@@ -1,0 +1,25 @@
+ethereum/node_modules
+ethereum/.env
+ethereum/coverage
+ethereum/coverage.json
+ethereum/typechain
+
+#Hardhat files
+ethereum/cache
+ethereum/artifacts
+
+#client
+client/node_modules
+client/.next/
+# Windows device files
+ethereum/[Nn][Uu][Ll]
+
+# env
+.env
+ethereum/.env
+
+# env
+.env
+**/.env
+.env.local
+ethereum/.env
