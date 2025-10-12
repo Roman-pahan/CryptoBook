@@ -1,5 +1,5 @@
 "use client";
-import { ButtonOr, ButtonGroup, Button } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import Layout from "../../components/Layout";
 import { useRouter } from "next/navigation";
 export default function Page() {
@@ -8,15 +8,15 @@ export default function Page() {
     <main style={{ padding: 24 }}>
       <Layout>
         <h1>Адресная книга социальных сетей: Discord и Telegram</h1>
-        <ButtonGroup>
+        <Button.Group>
           <Button primary onClick={() => router.push("/show")}>
             Посмотреть
           </Button>
-          <ButtonOr text={"||"} />
+          <Button.Or text={"||"} />
           <Button positive onClick={() => router.push("/add")}>
             Записать
           </Button>
-        </ButtonGroup>
+        </Button.Group>
       </Layout>
     </main>
   );

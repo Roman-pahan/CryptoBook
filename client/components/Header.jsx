@@ -1,25 +1,30 @@
 "use client";
 import { Button, Menu, MenuItem } from "semantic-ui-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-const Header = () => {
-  const [currentAccount, setCurrentAccount] = useState();
+const Header = ({ account, onAccountChange }) => {
+  const router = useRouter();
 
   const handleLogInClick = async () => {
     const { ethereum } = window;
     if (!ethereum) {
       alert("Установите кошелек!");
+      return;
     }
     try {
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
       });
-      setCurrentAccount(accounts[0]);
+      const addr = (accounts?.[0] || "").toLowerCase();
+      onAccountChange?.(addr); // пишем в общий стейт (Layout)
+      router.push("/user"); //  переходим
     } catch (error) {
       console.log(error);
     }
   };
+
+  console.log("Header account (from props): ", account);
 
   return (
     <Menu style={{ marginTop: "20px" }}>
@@ -35,15 +40,13 @@ const Header = () => {
         <MenuItem>Посмотреть контакт</MenuItem>
       </Link>
       <MenuItem position="right">
-        {!currentAccount ? (
+        {!account ? (
           <Button primary onClick={handleLogInClick}>
             Вход
           </Button>
         ) : (
           <Link href="/user">
-            <Button primary onClick={handleLogInClick}>
-              {currentAccount}
-            </Button>
+            <Button primary>{account}</Button>
           </Link>
         )}
       </MenuItem>
