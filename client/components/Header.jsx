@@ -24,6 +24,11 @@ const Header = ({ account, onAccountChange }) => {
     }
   };
 
+  const handleLogoutClick = () => {
+    onAccountChange?.(""); // чистим общий стейт
+    +router.push("/"); // на главную
+  };
+
   console.log("Header account (from props): ", account);
 
   return (
@@ -45,7 +50,7 @@ const Header = ({ account, onAccountChange }) => {
             Вход
           </Button>
         ) : (
-          <Link href="/user">
+          <Link href="/user" onClick={handleLogoutClick}>
             <Button primary>{account}</Button>
           </Link>
         )}

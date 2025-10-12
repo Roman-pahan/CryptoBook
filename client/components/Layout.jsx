@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
   }, []);
 
   const handleAccountChange = (_account) => {
-    const _setAccount = _account.toLowerCase();
+    const _setAccount = (_account || "").toLowerCase().trim();
     setAccount(_setAccount);
     try {
       localStorage.setItem("account", _setAccount);
@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
 
   return (
     <Container>
-      <Header onAccountChange={handleAccountChange} />
+      <Header account={account} onAccountChange={handleAccountChange} />
       {childrenMaybeWithAccount}
     </Container>
   );
