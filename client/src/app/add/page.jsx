@@ -41,7 +41,7 @@ const AddContact = () => {
       }
 
       console.log("response: ", response);
-      setSuccessMessage("Хэш транзакции: " + response.hash);
+      setSuccessMessage(response.hash);
     } catch (error) {
       console.error(error);
       setErrorMessage(error.message);
@@ -81,7 +81,18 @@ const AddContact = () => {
         <Message
           success
           header="Контакт успешно добавлен!"
-          content={successMessage}
+          content={
+            <>
+              {"Хэш транзакции: "}
+              <a
+                href={`https://sepolia.etherscan.io/tx/${successMessage}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {successMessage}
+              </a>
+            </>
+          }
         />
       </Form>
     </Layout>

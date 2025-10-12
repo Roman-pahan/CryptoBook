@@ -12,8 +12,12 @@ const UserContent = ({ account }) => {
   const [telegram, setTelegram] = useState("");
   const [discord, setDiscord] = useState("");
   const [desc, setDesc] = useState("");
+
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
+  const [name, setName] = useState("");
+
   console.log("userPage account: ", account);
 
   const fields = [
@@ -82,8 +86,8 @@ const UserContent = ({ account }) => {
       setTelegram("");
       setDiscord("");
       setDesc("");
-
-      setSuccessMessage(`${name} сохранён`);
+      setName(name);
+      setSuccessMessage(tx.hash);
     } catch (error) {
       console.error(error);
       setErrorMessage(error.message);
@@ -119,7 +123,18 @@ const UserContent = ({ account }) => {
       <Message
         success
         header="Контакт успешно добавлен!"
-        content={successMessage}
+        content={
+          <>
+            {`${name} сохранен. Хэш транзакции:`}
+            <a
+              href={`https://sepolia.etherscan.io/tx/${successMessage}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {successMessage}
+            </a>
+          </>
+        }
       />
     </Form>
   );
